@@ -148,8 +148,11 @@ void WindowedWebApp::attach(WebPage* page)
 	if (isTransparent())
 		m_page->webkitView()->setTransparent(true);
 
+//setSupportsSingleAndLockStickyStates missing on webOS 2
+#ifdef MACHINE_TOPAZ
     // for devices without a built-in physical keyboard, disable app side sticky state behavior
     m_page->webkitView()->setSupportsSingleAndLockStickyStates(DeviceInfo::instance()->keyboardAvailable());
+#endif
 
 	if (m_winType != Window::Type_ChildCard) {
 
